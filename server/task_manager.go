@@ -19,6 +19,27 @@ func (t Task) MarshalJSON() ([]byte, error) {
 	})
 }
 
+func (t *Task) UnmarshalJSON(data []byte) error {
+	tmp := struct {
+		D string `json:"duration"`
+	}{}
+
+	if err := json.Unmarshal(data, &tmp); err != nil {
+		return err
+	}
+
+	dur, err := time.ParseDuration(tmp.D)
+	if err != nil {
+		return err
+	}
+
+	*t = Task{
+		Dur: dur,
+	}
+
+	return nil
+}
+
 type TaskManager struct {
 	m       sync.RWMutex
 	tasks   []Task
