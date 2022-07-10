@@ -24,7 +24,7 @@ func TestTime() {
 		go func() {
 			defer wg.Done()
 			_, err := http.Post(
-				"http://localhost:3000/add?mod=async",
+				"http://localhost:5000/add?mod=async",
 				"text/plain",
 				bytes.NewBuffer([]byte("1s")),
 			)
@@ -38,7 +38,7 @@ func TestTime() {
 
 	wg.Wait()
 
-	resp, err := http.Get("http://localhost:3000/time")
+	resp, err := http.Get("http://localhost:5000/time")
 	if err != nil {
 		log.Panic(err)
 	}
@@ -63,7 +63,7 @@ func TestSchedule() {
 		go func() {
 			defer wg.Done()
 			_, err := http.Post(
-				"http://localhost:3000/add?mod=async",
+				"http://localhost:5000/add?mod=async",
 				"text/plain",
 				bytes.NewBuffer([]byte("1s")),
 			)
@@ -77,7 +77,7 @@ func TestSchedule() {
 
 	wg.Wait()
 
-	resp, err := http.Get("http://localhost:3000/schedule")
+	resp, err := http.Get("http://localhost:5000/schedule")
 	if err != nil {
 		log.Panic(err)
 	}
@@ -113,7 +113,7 @@ func TestSync() {
 		go func() {
 			defer wg.Done()
 			_, err := http.Post(
-				"http://localhost:3000/add?mod=async",
+				"http://localhost:5000/add?mod=async",
 				"text/plain",
 				bytes.NewBuffer([]byte("1s")),
 			)
@@ -129,7 +129,7 @@ func TestSync() {
 
 	start := time.Now()
 	_, err := http.Post(
-		"http://localhost:3000/add?mod=sync",
+		"http://localhost:5000/add?mod=sync",
 		"text/plain",
 		bytes.NewBuffer([]byte("0s")),
 	)

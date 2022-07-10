@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
 
@@ -13,8 +12,7 @@ func main() {
 		log.Panicln("invalid arguments count")
 	}
 
-	protoDirPath, binaryDirPath := os.Args[1], os.Args[2]
-	fmt.Println(protoDirPath, binaryDirPath)
+	protoDirPath, _ := os.Args[1], os.Args[2]
 
 	proto_reader.GetDescriptors(protoDirPath)
 }
